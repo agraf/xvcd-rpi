@@ -1,5 +1,5 @@
 CFLAGS= -Wall -Os -I/usr/include
-LDFLAGS=-lwiringPi -lwiringPiDev -lpthread
+LDFLAGS=-lwiringPi -lwiringPiDev -lpthread -lm -lrt
 
 all: xvcd
 
