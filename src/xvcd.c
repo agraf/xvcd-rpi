@@ -72,6 +72,14 @@ static int sread(int fd, void *target, int len)
 	return 1;
 }
 
+static void dumb_delay(int num)
+{
+    while (num) {
+        num--;
+        asm("");
+    }
+}
+
 //
 // handle_data(fd) handles JTAG shift instructions.
 //   To allow multiple programs to access the JTAG chain
@@ -201,7 +209,9 @@ int handle_data(int fd)
 				gpio_set(GPIO_TMS, tms);
 				gpio_set(GPIO_TDI, tdi);
 				gpio_set(GPIO_TCK, 1);
+				dumb_delay(1000);
 				gpio_set(GPIO_TCK, 0);
+				dumb_delay(1000);
 				
 				//
 				// Track the state.
